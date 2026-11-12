@@ -7,7 +7,6 @@
   <meta name="description" content="Conheça nossa experiência de streaming 4K. Peça seu teste grátis pelo WhatsApp.">
   <title>ATMOS | Streaming 4K</title>
 
-  <!-- Fonte externa; o site continua funcional caso o Google Fonts não esteja disponível. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -188,7 +187,6 @@
       will-change: transform, opacity, filter;
     }
 
-    /* Enquadramento e zoom para eliminar bordas pretas nos vídeos verticais e quadrados */
     .tv-card video {
       position: absolute;
       top: 50%;
@@ -202,7 +200,6 @@
       pointer-events: none;
     }
 
-    /* Rotação automática de -90 graus para vídeos horizontais gravados na vertical */
     .tv-card video.is-rotated-ccw {
       width: var(--card-h, 100cqh);
       height: var(--card-w, 100cqw);
@@ -211,28 +208,24 @@
       transform: translate(-50%, -50%) rotate(-90deg) scale(var(--vid-scale, 1.12));
     }
 
-    /* Vídeo em reprodução na frente */
     .tv-card.is-front {
       opacity: 0.94;
       transform: translate3d(0, 0, 0) scale(1);
       filter: brightness(0.96) saturate(1.08);
       z-index: 4;
     }
-    /* Recuando para trás - nível 1 */
     .tv-card.is-back-1 {
       opacity: 0.50;
       transform: translate3d(0, -14px, -130px) scale(0.84);
       filter: brightness(0.65) blur(0.6px);
       z-index: 3;
     }
-    /* Indo mais para o fundo - nível 2 */
     .tv-card.is-back-2 {
       opacity: 0.24;
       transform: translate3d(0, -26px, -250px) scale(0.70);
       filter: brightness(0.45) blur(1.5px);
       z-index: 2;
     }
-    /* Desaparecendo no fundo - nível 3 */
     .tv-card.is-back-3 {
       opacity: 0;
       transform: translate3d(0, -38px, -370px) scale(0.56);
@@ -240,7 +233,6 @@
       z-index: 1;
     }
 
-    /* Camada translúcida para garantir nitidez dos títulos sem tampar a ação dos vídeos */
     .screen-inner::after {
       content: "";
       position: absolute;
@@ -304,7 +296,6 @@
     h2 { margin: 8px 0 0; font-size: clamp(1.7rem, 3vw, 2.45rem); letter-spacing: -.045em; }
     .section-note { color: var(--muted); font-size: .85rem; }
 
-    /* Faixa infinita: duas cópias da mesma lista garantem a continuidade do loop. */
     .carousel-shell {
       position: relative;
       overflow: hidden;
@@ -456,7 +447,7 @@
       <a href="#vantagens">Vantagens</a>
       <a href="#teste">Teste grátis</a>
     </nav>
-    <a class="nav-cta" href="https://wa.me/558287938111?text=Olá!%20Gostaria%20de%20fazer%20meu%20teste%20grátis%20agora." target="_blank" rel="noopener noreferrer"> <span>◉</span> Teste grátis</a>
+    <a class="nav-cta wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora."><span>◉</span> Teste grátis</a>
   </header>
 
   <main>
@@ -466,7 +457,7 @@
         <h1>Sua diversão em outro <span>nível.</span></h1>
         <p class="hero-copy">Filmes, séries e muito mais em uma experiência de streaming moderna. Descubra os destaques e solicite seu teste grátis diretamente pelo WhatsApp.</p>
         <div class="hero-actions">
-          <a class="primary-btn" href="https://wa.me/558287938111?text=Olá!%20Gostaria%20de%20fazer%20meu%20teste%20grátis%20agora." target="_blank" rel="noopener noreferrer">▶ &nbsp; Quero testar grátis</a>
+          <a class="primary-btn wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora.">▶ &nbsp; Quero testar grátis</a>
           <a class="secondary-link" href="#catalogo">Explorar destaques ↓</a>
         </div>
       </div>
@@ -492,9 +483,7 @@
         <div class="section-note">Toque em um título e peça seu teste grátis</div>
       </div>
       <div class="carousel-shell" aria-label="Carrossel de filmes e séries em destaque">
-        <div class="carousel-track" id="carouselTrack">
-          <!-- Os cards são duplicados pelo JavaScript para formar o loop contínuo. -->
-        </div>
+        <div class="carousel-track" id="carouselTrack"></div>
       </div>
     </section>
 
@@ -514,7 +503,7 @@
         <div class="section-kicker">Comece agora</div>
         <h2>Pronto para descobrir uma nova experiência?</h2>
         <p>Chame nossa equipe no WhatsApp e solicite seu teste grátis. Atendimento rápido e orientação para configurar seu dispositivo.</p>
-        <a class="primary-btn" href="https://wa.me/558287938111?text=Olá!%20Gostaria%20de%20fazer%20meu%20teste%20grátis%20agora." target="_blank" rel="noopener noreferrer">◉ &nbsp; Solicitar teste grátis</a>
+        <a class="primary-btn wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora.">◉ &nbsp; Solicitar teste grátis</a>
       </div>
     </section>
   </main>
@@ -524,10 +513,38 @@
     <span>Disponibilidade e qualidade dependem do dispositivo, conteúdo e conexão.</span>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/558287938111?text=Olá!%20Gostaria%20de%20fazer%20meu%20teste%20grátis%20agora." target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">◉</a>
+  <a class="whatsapp-float wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora." aria-label="Fale conosco pelo WhatsApp">◉</a>
 
   <script>
-    const whatsappURL = "https://wa.me/558287938111?text=Olá!%20Gostaria%20de%20fazer%20meu%20teste%20grátis%20agora.";
+    const waPhone = "558287938111";
+    const waMessage = "Olá! Gostaria de fazer meu teste grátis agora.";
+    const waEncoded = encodeURIComponent(waMessage);
+    const waAppURL = `whatsapp://send?phone=${waPhone}&text=${waEncoded}`;
+    const waWebURL = `https://api.whatsapp.com/send?phone=${waPhone}&text=${waEncoded}`;
+
+    // Abre o aplicativo oficial do WhatsApp diretamente (contorna bloqueio do navegador interno do TikTok/Instagram)
+    function triggerWhatsApp(event) {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        event.preventDefault();
+        window.location.href = waAppURL;
+        setTimeout(() => {
+          if (!document.hidden) {
+            window.location.href = waWebURL;
+          }
+        }, 1600);
+      } else {
+        event.preventDefault();
+        window.open(waWebURL, "_blank", "noopener,noreferrer");
+      }
+    }
+
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("a.wa-link");
+      if (link) {
+        triggerWhatsApp(event);
+      }
+    });
 
     const titles = [
       { name: "Breaking Bad", type: "Série", image: "https://images.metahub.space/poster/small/tt0903747/img" },
@@ -548,10 +565,8 @@
 
     function createCard(item) {
       const card = document.createElement("a");
-      card.className = "movie-card";
-      card.href = whatsappURL;
-      card.target = "_blank";
-      card.rel = "noopener noreferrer";
+      card.className = "movie-card wa-link";
+      card.href = waWebURL;
       card.setAttribute("aria-label", `Solicitar teste grátis para assistir ${item.name}`);
 
       const img = document.createElement("img");
@@ -594,17 +609,6 @@
 
     [...titles, ...titles].forEach((item) => track.appendChild(createCard(item)));
 
-    /*
-      Configuração dos 6 vídeos:
-      Compatível tanto com o nome original do arquivo quanto com 'video_1.mp4' a 'video_6.mp4'.
-      
-      - Vídeo 1 (Enrolados): Vertical -> Zoom (scale: 1.18) com foco no topo
-      - Vídeo 2 (Como Eu Era Antes de Você): Zoom (scale: 1.15) com foco no rosto
-      - Vídeo 3 (La La Land): Horizontal gravado na vertical -> Gira -90° (rotateCCW: true) e preenche 100% da tela
-      - Vídeo 4 (A Dama e o Vagabundo): Zoom (scale: 1.18) com foco centralizado
-      - Vídeo 5 (Dexter): Zoom (scale: 1.18) com foco alinhado aos olhos
-      - Vídeo 6 (Harry Potter): Horizontal gravado na vertical -> Gira -90° (rotateCCW: true) e preenche 100% da tela
-    */
     const videoConfigs = [
       {
         sources: ["299ad2577c211d35adceb39ed572e5b7.mp4", "video_1.mp4", "video1.mp4", "1.mp4"],
@@ -688,7 +692,6 @@
       video.addEventListener("error", trySource);
       trySource();
 
-      // Só avança para o próximo quando o vídeo atual terminar por completo
       video.addEventListener("ended", () => {
         if (currentIndex === idx) {
           advanceToNextVideo();
@@ -731,7 +734,6 @@
 
     renderDeckPositions();
 
-    // Fallback de segurança: avança caso o arquivo falhe ou pause inesperadamente
     setInterval(() => {
       const active = cards[currentIndex];
       if (active && (active.video.paused || active.video.ended || active.video.readyState === 0)) {
