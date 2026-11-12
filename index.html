@@ -40,6 +40,73 @@
     a { color: inherit; text-decoration: none; }
     button { font: inherit; }
 
+    /* Oculto no computador por padrão; exibido apenas no mobile */
+    .browser-tip-wrap {
+      display: none;
+      width: min(1180px, calc(100% - 28px));
+      margin: 10px auto 0;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 20;
+    }
+    .browser-tip-wrap.is-mobile-visible {
+      display: flex;
+    }
+    .browser-tip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 315px;
+      padding: 9px 13px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.20), rgba(13, 22, 36, 0.96));
+      border: 1.5px solid var(--green);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 22px rgba(0, 255, 136, 0.25);
+      color: #f4f7fb;
+      font-size: 0.73rem;
+      line-height: 1.35;
+      backdrop-filter: blur(8px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .browser-tip.is-pulsing {
+      transform: scale(1.04);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), 0 0 34px rgba(0, 255, 136, 0.65);
+    }
+    .browser-tip-text strong {
+      color: var(--green);
+      font-weight: 800;
+      display: block;
+      font-size: 0.76rem;
+      margin-bottom: 1px;
+    }
+    .browser-tip-dots {
+      display: inline-block;
+      padding: 0 5px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    .browser-tip-arrow {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--green);
+      color: #04110b;
+      font-size: 1.15rem;
+      font-weight: 900;
+      box-shadow: 0 0 16px rgba(0, 255, 136, 0.5);
+      animation: pointUpRight 1.1s ease-in-out infinite;
+    }
+    @keyframes pointUpRight {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(3px, -4px); }
+    }
+
     .topbar {
       width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
@@ -418,10 +485,12 @@
     .whatsapp-float:hover { transform: translateY(-4px) scale(1.04); }
 
     @media (max-width: 760px) {
-      .topbar { min-height: 72px; }
+      .browser-tip-wrap { display: flex; margin-top: 8px; }
+      .browser-tip { max-width: 300px; font-size: 0.71rem; padding: 8px 11px; }
+      .topbar { min-height: 68px; margin-top: 8px; }
       .nav { display: none; }
-      .nav-cta { padding: 11px 15px; font-size: .78rem; }
-      .hero { grid-template-columns: 1fr; margin-top: 28px; gap: 18px; }
+      .nav-cta { padding: 11px 16px; font-size: .80rem; margin-top: 6px; }
+      .hero { grid-template-columns: 1fr; margin-top: 22px; gap: 18px; }
       .hero-art { min-height: 245px; }
       .screen { max-width: 390px; }
       .section { margin-bottom: 62px; }
@@ -433,11 +502,23 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .carousel-track { animation: none; }
+      .browser-tip-arrow { animation: none; }
       *, *::before, *::after { transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
+  <!-- Balão de instrução exibido somente no mobile apontando para os três pontinhos (...) -->
+  <div class="browser-tip-wrap" id="browserTipWrap">
+    <div class="browser-tip" id="browserTip">
+      <div class="browser-tip-text">
+        <strong>Para abrir o WhatsApp:</strong>
+        Toque nos <span class="browser-tip-dots">•••</span> acima e selecione <b>"Abrir no navegador"</b>.
+      </div>
+      <div class="browser-tip-arrow" aria-hidden="true">↗</div>
+    </div>
+  </div>
+
   <header class="topbar">
     <a class="brand" href="#" aria-label="ATMOS início">
       <span class="brand-mark">▶</span><span>ATMOS</span>
@@ -447,7 +528,7 @@
       <a href="#vantagens">Vantagens</a>
       <a href="#teste">Teste grátis</a>
     </nav>
-    <a class="nav-cta wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora."><span>◉</span> Teste grátis</a>
+    <a class="nav-cta wa-link" href="https://wa.me/558287938111?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora." target="_blank" rel="noopener noreferrer"><span>◉</span> Teste grátis</a>
   </header>
 
   <main>
@@ -457,7 +538,7 @@
         <h1>Sua diversão em outro <span>nível.</span></h1>
         <p class="hero-copy">Filmes, séries e muito mais em uma experiência de streaming moderna. Descubra os destaques e solicite seu teste grátis diretamente pelo WhatsApp.</p>
         <div class="hero-actions">
-          <a class="primary-btn wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora.">▶ &nbsp; Quero testar grátis</a>
+          <a class="primary-btn wa-link" href="https://wa.me/558287938111?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora." target="_blank" rel="noopener noreferrer">▶ &nbsp; Quero testar grátis</a>
           <a class="secondary-link" href="#catalogo">Explorar destaques ↓</a>
         </div>
       </div>
@@ -503,7 +584,7 @@
         <div class="section-kicker">Comece agora</div>
         <h2>Pronto para descobrir uma nova experiência?</h2>
         <p>Chame nossa equipe no WhatsApp e solicite seu teste grátis. Atendimento rápido e orientação para configurar seu dispositivo.</p>
-        <a class="primary-btn wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora.">◉ &nbsp; Solicitar teste grátis</a>
+        <a class="primary-btn wa-link" href="https://wa.me/558287938111?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora." target="_blank" rel="noopener noreferrer">◉ &nbsp; Solicitar teste grátis</a>
       </div>
     </section>
   </main>
@@ -513,36 +594,25 @@
     <span>Disponibilidade e qualidade dependem do dispositivo, conteúdo e conexão.</span>
   </footer>
 
-  <a class="whatsapp-float wa-link" href="https://api.whatsapp.com/send?phone=558287938111&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora." aria-label="Fale conosco pelo WhatsApp">◉</a>
+  <a class="whatsapp-float wa-link" href="https://wa.me/558287938111?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora." target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">◉</a>
 
   <script>
-    const waPhone = "558287938111";
-    const waMessage = "Olá! Gostaria de fazer meu teste grátis agora.";
-    const waEncoded = encodeURIComponent(waMessage);
-    const waAppURL = `whatsapp://send?phone=${waPhone}&text=${waEncoded}`;
-    const waWebURL = `https://api.whatsapp.com/send?phone=${waPhone}&text=${waEncoded}`;
+    const whatsappURL = "https://wa.me/558287938111?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20meu%20teste%20gr%C3%A1tis%20agora.";
+    const browserTipWrap = document.getElementById("browserTipWrap");
+    const browserTip = document.getElementById("browserTip");
 
-    // Abre o aplicativo oficial do WhatsApp diretamente (contorna bloqueio do navegador interno do TikTok/Instagram)
-    function triggerWhatsApp(event) {
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isMobile) {
-        event.preventDefault();
-        window.location.href = waAppURL;
-        setTimeout(() => {
-          if (!document.hidden) {
-            window.location.href = waWebURL;
-          }
-        }, 1600);
-      } else {
-        event.preventDefault();
-        window.open(waWebURL, "_blank", "noopener,noreferrer");
-      }
+    // Garante que o aviso apareça em qualquer celular (mesmo em paisagem) e nunca no computador
+    const isMobileDevice = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobileDevice && browserTipWrap) {
+      browserTipWrap.classList.add("is-mobile-visible");
     }
 
+    // Se o usuário tocar em um botão do WhatsApp no celular, destaca o balão do topo
     document.addEventListener("click", (event) => {
       const link = event.target.closest("a.wa-link");
-      if (link) {
-        triggerWhatsApp(event);
+      if (link && browserTip && isMobileDevice) {
+        browserTip.classList.add("is-pulsing");
+        setTimeout(() => browserTip.classList.remove("is-pulsing"), 1400);
       }
     });
 
@@ -566,7 +636,9 @@
     function createCard(item) {
       const card = document.createElement("a");
       card.className = "movie-card wa-link";
-      card.href = waWebURL;
+      card.href = whatsappURL;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
       card.setAttribute("aria-label", `Solicitar teste grátis para assistir ${item.name}`);
 
       const img = document.createElement("img");
